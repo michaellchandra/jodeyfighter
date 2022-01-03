@@ -9,23 +9,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        body = GetComponent<RigidBody2D>();
+        body = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        body.velocity = new Vector3(Input.GetAxis("Horizontal"), body.velocity.y, body.velocity.z);
+        body.velocity = new Vector2(Input.GetAxis("Horizontal"), body.velocity.y);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
