@@ -6,10 +6,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed; 
     private Rigidbody2D body;
+    private Animator animation;
 
+    //Variabel Rigidbody dan Animator
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        animation = GetComponent<Animator>();
     }
 
     private void Update()
@@ -30,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
             body.velocity = new Vector2(body.velocity.x, speed);
+
+        //Parameter Animator
+
+        animation.SetBool("running", horizontalInput != 0);
     }
 
     
