@@ -21,9 +21,11 @@ public class PlayerMovement : MonoBehaviour
 
         //Balik Arah Player kiri kanan
         if (horizontalInput > 0.01f)
-            transform.localScale = new Vector3(-4, 4, 1);
+            transform.localScale = new Vector3(-2, 2, 1);
+        else if (horizontalInput == 0.00f)
+            transform.localScale = new Vector3(-2, 2, 1);
         else if (horizontalInput < 0.01f)
-            transform.localScale = new Vector3(4, 4, 1);
+            transform.localScale = new Vector3(2, 2, 1);
 
 
         if (Input.GetKey(KeyCode.Space))
