@@ -7,6 +7,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed; 
     private Rigidbody2D body;
 
+    public int MaxHealth = 100;
+    public int currentHealth;
+
+    void start()
+    {
+        currentHealth = MaxHealth;
+    }
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -28,7 +36,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
             body.velocity = new Vector2(body.velocity.x, speed);
+
+        //if (kenahit)
+       // {
+      //      TakeDamage(10);
+       // }
     }
 
-    
+   // void TakeDamage(int damage)
+  //  {
+  //      currentHealth -= damage;
+   // }
+
 }
