@@ -20,9 +20,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && cooldownTime > attackCooldown && playerMovement.canAttack())
+        //if (Input.GetMouseButton(0) && cooldownTime > attackCooldown && playerMovement.canAttack())
 
-            Attacking();
+        //    Attacking();
     }
 
     private void Attacking()
