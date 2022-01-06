@@ -10,8 +10,10 @@ public class PlayerMovement : MonoBehaviour
     private Animator animation;
     private BoxCollider2D boxCollider;
     private float jumpWallCooldown;
+    private float inputHorizontal;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+    
 
 
 
@@ -25,34 +27,34 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-
-        
+        inputHorizontal = Input.GetAxis("Horizontal");
 
 
         //Balik Arah Player kiri kanan
-        if (horizontalInput > 0.01f)
+        if (inputHorizontal > 0.01f)
             transform.localScale = new Vector3(-2, 2, 1);
-        else if (horizontalInput == 0.00f)
+        else if (inputHorizontal == 0.00f)
             transform.localScale = new Vector3(-2, 2, 1);
-        else if (horizontalInput < 0.01f)
+        else if (inputHorizontal < 0.01f)
             transform.localScale = new Vector3(2, 2, 1);
 
 
         //Parameter Animator
 
-        animation.SetBool("running", horizontalInput != 0);
+        animation.SetBool("running", inputHorizontal != 0);
         animation.SetBool("grounded", isGrounded());
 
         //Lompat ke Wall
 
-        if (jumpWallCooldown < 0.3f)
+        if (jumpWallCooldown < 0.2f)
         {
            
 
-            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+            body.velocity = new Vector2(inputHorizontal * speed, body.velocity.y);
 
             if (onWall() && !isGrounded()){
+
+               
                 body.gravityScale = 0;
                 body.velocity = Vector2.zero;
             }
@@ -75,12 +77,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded())
         {
-            animation.SetTrigger("jump");
+            
             body.velocity = new Vector2(body.velocity.x, jump_power);
+            animation.SetTrigger("jump");
         }
 
         else if (onWall() && !isGrounded())
         {
+            if (inputHorizontal == 0)
+            {
+                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
+                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                  
+            }
+            else
+            
+            jumpWallCooldown = 0;
+            body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
 
         }
 
@@ -106,6 +119,11 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
+    }
+
+    public bool canAttack()
+    {
+        return inputHorizontal == 0 && isGrounded() && !onWall();
     }
 
 }
