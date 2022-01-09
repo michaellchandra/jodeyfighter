@@ -5,33 +5,19 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private float startHealth;
-    public float maxHealth = 5;
-    public float currentHealth { get; private set; }
+
+    public float currentHealth;
+
     private Animator animation;
     private bool dead;
 
-    void Start()
+
+
+    private void Awake()
     {
-        currentHealth = maxHealth;
+        currentHealth = startHealth;
+        animation = GetComponent<Animator>();
     }
-    //void TakeDamage (int amount)
-    //{
-    //    currentHealth -= amount;
-
-    //    if (currentHealth <= 0)
-    //    {
-    //        //Mati
-    //        animation.SetTrigger("died");
-    //        GetComponent<PlayerMovement>().enabled = false;
-    //        dead = true;
-    //    }
-    //}
-
-    //private void Awake()
-    //{
-    //    currentHealth = maxHealth;
-    //    animation = GetComponent<Animator>();
-    //}
 
     public void takingHitDamage(float _damage)
     {
