@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private float inputHorizontal;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
-    
+    private bool Jumpjump;
+
 
 
 
@@ -33,9 +34,7 @@ public class PlayerMovement : MonoBehaviour
         //Balik Arah Player kiri kanan
         if (inputHorizontal > 0.01f)
             transform.localScale = new Vector3(-2, 2, 1);
-        else if (inputHorizontal == 0.00f)
-            transform.localScale = new Vector3(-2, 2, 1);
-        else if (inputHorizontal < 0.01f)
+        else if (inputHorizontal < -0.01f)
             transform.localScale = new Vector3(2, 2, 1);
 
 
@@ -48,58 +47,37 @@ public class PlayerMovement : MonoBehaviour
 
         if (jumpWallCooldown < 0.2f)
         {
-           
 
             body.velocity = new Vector2(inputHorizontal * speed, body.velocity.y);
 
-            if (onWall() && !isGrounded()){
-
-               
+            if (onWall() && !isGrounded())
+            {
                 body.gravityScale = 0;
                 body.velocity = Vector2.zero;
             }
-
             else
             {
                 body.gravityScale = 3;
             }
-
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && !Jumpjump)
+            
                 Jump();
-        }
+                animation.SetTrigger("grounded");
+            
+            }
+        
         else
         {
             jumpWallCooldown += Time.deltaTime;
         }
+
     }
 
     private void Jump()
     {
-        if (isGrounded())
-        {
-            
-            body.velocity = new Vector2(body.velocity.x, jump_power);
-            animation.SetTrigger("jump");
-        }
-
-        else if (onWall() && !isGrounded())
-        {
-            if (inputHorizontal == 0)
-            {
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
-                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                  
-            }
-            else
-            
-            jumpWallCooldown = 0;
-            body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
-
-        }
-
-        if (Input.GetKey(KeyCode.Space))
-            Jump();
-
+        body.velocity = new Vector2(body.velocity.x, jump_power);
+        Jumpjump = true;
+        animation.SetTrigger("jump");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
