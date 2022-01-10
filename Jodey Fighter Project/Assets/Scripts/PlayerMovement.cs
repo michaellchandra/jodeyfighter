@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
     //Variabel Rigidbody dan Animator
     private void Awake()
     {
@@ -33,9 +34,17 @@ public class PlayerMovement : MonoBehaviour
 
         //Balik Arah Player kiri kanan
         if (inputHorizontal > 0.01f)
+        {
             transform.localScale = new Vector3(-2, 2, 1);
+            Jumpjump = false;
+
+        }
         else if (inputHorizontal < -0.01f)
+        {
             transform.localScale = new Vector3(2, 2, 1);
+            Jumpjump = false;
+
+        }
 
 
         //Parameter Animator
@@ -43,33 +52,16 @@ public class PlayerMovement : MonoBehaviour
         animation.SetBool("running", inputHorizontal != 0);
         animation.SetBool("grounded", isGrounded());
 
-        //Lompat ke Wall
 
-        if (jumpWallCooldown < 0.2f)
+
+        body.velocity = new Vector2(inputHorizontal * speed, body.velocity.y);
+
+
+        if (Input.GetKey(KeyCode.Space) && !Jumpjump)
         {
-
-            body.velocity = new Vector2(inputHorizontal * speed, body.velocity.y);
-
-            if (onWall() && !isGrounded())
-            {
-                body.gravityScale = 0;
-                body.velocity = Vector2.zero;
-            }
-            else
-            {
-                body.gravityScale = 3;
-            }
-            if (Input.GetKey(KeyCode.Space) && !Jumpjump)
-            
-                Jump();
-                animation.SetTrigger("grounded");
-            
-            }
-        
-        else
-        {
-            jumpWallCooldown += Time.deltaTime;
+            Jump();
         }
+        animation.SetTrigger("grounded");
 
     }
 
@@ -93,15 +85,10 @@ public class PlayerMovement : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    private bool onWall()
-    {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
-        return raycastHit.collider != null;
-    }
 
     public bool canAttack()
     {
-        return inputHorizontal == 0 && isGrounded() && !onWall();
+        return inputHorizontal == 0 && isGrounded();
     }
 
 }

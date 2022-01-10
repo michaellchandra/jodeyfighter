@@ -9899,6 +9899,7 @@ MonoBehaviour:
   enemy: {fileID: 1472693501}
   enemySpeed: 1
   animation: {fileID: 1472693506}
+  enemyIdlingDuration: 0
 --- !u!1 &1754056613
 GameObject:
   m_ObjectHideFlags: 0
@@ -12261,6 +12262,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1750118330}
     m_Modifications:
+    - target: {fileID: 3827634516467835014, guid: f86262669b86f4450b34e953d04e5249, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827634516467835014, guid: f86262669b86f4450b34e953d04e5249, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827634516467835014, guid: f86262669b86f4450b34e953d04e5249, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827634516467835014, guid: f86262669b86f4450b34e953d04e5249, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827634516467835014, guid: f86262669b86f4450b34e953d04e5249, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827634516467835015, guid: f86262669b86f4450b34e953d04e5249, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827634516467835015, guid: f86262669b86f4450b34e953d04e5249, type: 3}
+      propertyPath: cooldownAttack
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827634516467835015, guid: f86262669b86f4450b34e953d04e5249, type: 3}
+      propertyPath: boxColliderDistance
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3827634516467835259, guid: f86262669b86f4450b34e953d04e5249, type: 3}
       propertyPath: m_RootOrder
       value: 2

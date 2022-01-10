@@ -20,7 +20,7 @@ public class MeleeEnemy : MonoBehaviour
 
     //Panggil Enemy Patrol
     private PatrolEnemy enemyPatrol;
-    
+
 
 
     private void Awake()
@@ -56,7 +56,7 @@ public class MeleeEnemy : MonoBehaviour
         if (enemyPatrol != null)
             enemyPatrol.enabled = !PlayerInRange();
 
-        
+
     }
 
     private bool PlayerInRange()
@@ -86,8 +86,8 @@ public class MeleeEnemy : MonoBehaviour
         {
 
             playerHealth.takingHitDamage(damage);
-            
-            
+
+
         }
     }
 }

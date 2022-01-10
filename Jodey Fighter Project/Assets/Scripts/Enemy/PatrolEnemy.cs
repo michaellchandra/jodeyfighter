@@ -60,8 +60,8 @@ public class PatrolEnemy : MonoBehaviour
     private void MovingDirection (int _direction)
     {
 
-        idlingTimer = 0;
-        animation.SetBool("moving", true);
+        idlingTimer = 3;
+        animation.SetBool("moving", false);
 
         //Arah penglihatan atau Wajah Musuh
         enemy.localScale = new Vector3(Mathf.Abs (initScale.x) * _direction, initScale.y, initScale.z);
@@ -76,7 +76,7 @@ public class PatrolEnemy : MonoBehaviour
 
     private void ChangeDirection()
     {
-        animation.SetBool("moving", false);
+        animation.SetBool("moving", true);
 
         idlingTimer += Time.deltaTime;
 

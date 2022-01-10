@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/LevelEasy.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Levels/Main Menu.unity
+    guid: 360f0832a65c8484b96f43c8f22df1a9
+  - enabled: 1
+    path: Assets/Levels/ChoosingDifficulty.unity
+    guid: 3d350af102547d74ebb7edc23895d5c2
   m_configObjects: {}
