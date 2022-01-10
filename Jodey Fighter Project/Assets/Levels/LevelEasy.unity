@@ -2132,7 +2132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394566754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.21, y: -2.53, z: 0}
+  m_LocalPosition: {x: -8.21, y: -3.56, z: 0}
   m_LocalScale: {x: -2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6017,7 +6017,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972263781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.28, y: -2.78, z: 0}
+  m_LocalPosition: {x: 7.58, y: -2.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9131,6 +9131,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3827634516467835259, guid: f86262669b86f4450b34e953d04e5249, type: 3}
   m_PrefabInstance: {fileID: 3827634517805458822}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1472693506 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3827634516467835256, guid: f86262669b86f4450b34e953d04e5249, type: 3}
+  m_PrefabInstance: {fileID: 3827634517805458822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1477538874
 GameObject:
   m_ObjectHideFlags: 0
@@ -9893,6 +9898,7 @@ MonoBehaviour:
   goingRight: {fileID: 972263782}
   enemy: {fileID: 1472693501}
   enemySpeed: 1
+  animation: {fileID: 1472693506}
 --- !u!1 &1754056613
 GameObject:
   m_ObjectHideFlags: 0

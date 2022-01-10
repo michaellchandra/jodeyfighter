@@ -16,7 +16,7 @@ public class PatrolEnemy : MonoBehaviour
     [SerializeField] private float enemySpeed;
 
     [Header("Enemy Animation")]
-    private Animator animation;
+    [SerializeField] private Animator animation;
 
     private Vector3 initScale;
 
@@ -27,8 +27,35 @@ public class PatrolEnemy : MonoBehaviour
         initScale = enemy.localScale;
     }
 
+    private void Update()
+    {
+        if (moveToLeft)
+        {
+            if (enemy.position.x >= goingLeft.position.x)
+                MovingDirection(-1);
+            
+            else
+                ChangeDirection();
+            
+
+        }
+        else
+        {
+            if (enemy.position.x <= goingRight.position.x)
+                MovingDirection(1);
+            
+
+            else
+                ChangeDirection();
+            
+        }
+
+    }
+
     private void MovingDirection (int _direction)
     {
+
+        animation.SetBool("moving", true);
 
         //Arah penglihatan atau Wajah Musuh
         enemy.localScale = new Vector3(Mathf.Abs (initScale.x) * _direction, initScale.y, initScale.z);
@@ -39,40 +66,11 @@ public class PatrolEnemy : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (moveToLeft)
-        {
-            if (enemy.position.x >= goingLeft.position.x)
-            {
-                MovingDirection(-1);
-            }
-                
-
-            else
-            {
-                ChangeDirection();
-            }
-            
-        }
-        else
-        {
-            if(enemy.position.x <= goingRight.position.x)
-            {
-                MovingDirection(1);
-            }
-            
-
-            else
-            {
-                ChangeDirection();
-            }
-        }
-        
-    }
+    
 
     private void ChangeDirection()
     {
+        animation.SetBool("moving", false);
         moveToLeft = !moveToLeft;
     }
 }
