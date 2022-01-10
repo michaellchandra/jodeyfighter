@@ -17,6 +17,11 @@ public class PatrolEnemy : MonoBehaviour
 
     [Header("Enemy Animation")]
     [SerializeField] private Animator animation;
+    private float idlingTimer;
+
+
+    [SerializeField]private float enemyIdlingDuration;
+
 
     private Vector3 initScale;
 
@@ -55,6 +60,7 @@ public class PatrolEnemy : MonoBehaviour
     private void MovingDirection (int _direction)
     {
 
+        idlingTimer = 0;
         animation.SetBool("moving", true);
 
         //Arah penglihatan atau Wajah Musuh
@@ -71,6 +77,10 @@ public class PatrolEnemy : MonoBehaviour
     private void ChangeDirection()
     {
         animation.SetBool("moving", false);
-        moveToLeft = !moveToLeft;
+
+        idlingTimer += Time.deltaTime;
+
+        if(idlingTimer > enemyIdlingDuration)
+            moveToLeft = !moveToLeft;
     }
 }

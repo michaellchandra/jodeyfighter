@@ -17,12 +17,24 @@ public class MeleeEnemy : MonoBehaviour
 
     //Panggil PlayerHealth
     private Health playerHealth;
+
+    //Panggil Enemy Patrol
+    private PatrolEnemy enemyPatrol;
     
 
 
     private void Awake()
     {
         animation = GetComponent<Animator>();
+
+        enemyPatrol = GetComponentInParent<PatrolEnemy>();
+    }
+
+    private void OnDisable()
+    {
+        //Menghentikan atau Destroy
+        animation.SetBool("moving", false);
+
     }
 
 
@@ -40,6 +52,9 @@ public class MeleeEnemy : MonoBehaviour
                 animation.SetTrigger("meleeAttack");
             }
         }
+
+        if (enemyPatrol != null)
+            enemyPatrol.enabled = !PlayerInRange();
 
         
     }
