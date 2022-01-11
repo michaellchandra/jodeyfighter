@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jump_power;
+    [SerializeField] private float attackCooldown;
     private Rigidbody2D body;
     private Animator animation;
     private BoxCollider2D boxCollider;
@@ -14,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     private bool Jumpjump;
+    private bool Attack;
+    private float cooldownTime = Mathf.Infinity;
 
 
 
@@ -37,13 +40,19 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.localScale = new Vector3(-2, 2, 1);
             Jumpjump = false;
+            Attack = true;
 
         }
         else if (inputHorizontal < -0.01f)
         {
             transform.localScale = new Vector3(2, 2, 1);
             Jumpjump = false;
-
+            Attack = true;
+        }
+        else if (inputHorizontal == 0f)
+        {
+            Jumpjump = false;
+            Attack = true;
         }
 
 
@@ -62,6 +71,11 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
         animation.SetTrigger("grounded");
+
+        if (Input.GetMouseButton(0) && Attack)
+            Attacking();
+
+        cooldownTime += Time.deltaTime;
 
     }
 
@@ -86,9 +100,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+
     public bool canAttack()
     {
-        return inputHorizontal == 0 && isGrounded();
+        return isGrounded();
     }
+    private void Attacking()
+    {
+        animation.SetTrigger("attack");
+        Attack = false;
+        cooldownTime = 0;
 
+    }
 }
